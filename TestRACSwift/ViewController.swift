@@ -61,6 +61,8 @@ class ViewController: UIViewController {
 
 }
 
+typealias MutableStringProperty = MutableProperty<String>
+
 final class ViewModel {
     struct FormError: Error {
         let reason: String
@@ -70,8 +72,10 @@ final class ViewModel {
         static let usernameUnavailable = FormError(reason: "The username has been taken.")
     }
     
-    let email: MutableValidatingProperty<String, FormError>
-    let emailConfirmation: MutableValidatingProperty<String, FormError>
+    let email: MutableStringProperty
+    //MutableValidatingProperty<String, FormError>
+    let emailConfirmation: MutableStringProperty
+    //MutableValidatingProperty<String, FormError>
     let termsAccepted: MutableProperty<Bool>
     
     let reasons: Signal<String, NoError>
@@ -79,18 +83,21 @@ final class ViewModel {
     let submit: Action<(), (), FormError>
     
     init(userService: UserService) {
-        email = MutableValidatingProperty<String, FormError>("") { input in
+        email = MutableStringProperty("")
+            
+        /*    { input in
             return input.hasSuffix("@reactivecocoa.io") ? .success : .failure(.invalidEmail)
-        }
+        }*/
         
-        emailConfirmation = MutableValidatingProperty<String, FormError>("", with: email) { input, email in
+        emailConfirmation = MutableStringProperty("")
+        /*{ input, email in
             return input == email ? .success : .failure(.mismatchEmail)
-        }
+        }*/
         
         termsAccepted = MutableProperty(false)
         
         // Aggregate latest failure contexts as a stream of strings.
-        reasons = Property.combineLatest(email.result, emailConfirmation.result)
+        reasons = Property.combineLatest(email.re, emailConfirmation.value)
             .signal
             .debounce(0.1, on: QueueScheduler.main)
             .map { [$0, $1].flatMap { $0.error?.reason }.joined(separator: "\n") }
