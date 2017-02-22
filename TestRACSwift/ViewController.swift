@@ -96,8 +96,10 @@ final class ViewModel {
         
         termsAccepted = MutableProperty(false)
         
+        
+        
         // Aggregate latest failure contexts as a stream of strings.
-        reasons = Property.combineLatest(email.re, emailConfirmation.value)
+        reasons = Property.combineLatest(email, emailConfirmation)
             .signal
             .debounce(0.1, on: QueueScheduler.main)
             .map { [$0, $1].flatMap { $0.error?.reason }.joined(separator: "\n") }
@@ -106,8 +108,7 @@ final class ViewModel {
         //
         // It outputs the valid username for the `Action` to work on, or `nil` if the form
         // is invalid and the `Action` would be disabled consequently.
-        let validatedEmail = Property.combineLatest(email.result,
-                                                    emailConfirmation.result,
+        let validatedEmail = Property.combineLatest(email, emailConfirmation,
                                                     termsAccepted)
             .map { e, ec, t in e.value.flatMap { !ec.isFailure && t ? $0 : nil } }
         
