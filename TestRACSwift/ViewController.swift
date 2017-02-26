@@ -12,13 +12,39 @@ import Result
 
 class ViewController: UIViewController {
 
-    private let viewModel: ViewModel
-    private var formView: FormView!
+    private var viewModel: ViewModel!
+    
+    @IBOutlet var formView: FormView!
+    
+    //private var formView: FormView!
+    
+    let userService = UserService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         // Initialize the interactive controls.
+        
+        
+        viewModel = ViewModel(userService: userService)
+        // Setup console messages.
+        userService.requestSignal.observeValues {
+            print("UserService.requestSignal: Username `\($0)`.")
+        }
+        
+        viewModel.submit.completed.observeValues {
+            print("ViewModel.submit: execution producer has completed.")
+        }
+        
+        viewModel.email.signal.observeValues {
+            print("ViewModel.email: Validation result - \($0 != nil ? "\($0!)" : "No validation has ever been performed.")")
+        }
+        
+        viewModel.emailConfirmation.signal.observeValues {
+            print("ViewModel.emailConfirmation: Validation result - \($0 != nil ? "\($0!)" : "No validation has ever been performed.")")
+        }
+        
+        
         formView.emailField.text = viewModel.email.value
         formView.emailConfirmationField.text = viewModel.emailConfirmation.value
         formView.termsSwitch.isOn = false
@@ -38,25 +64,13 @@ class ViewController: UIViewController {
         
         // Setup the Action binding with the submit button.
         formView.submitButton.reactive.pressed = CocoaAction(viewModel.submit)
+        
+        self.formView.setNeedsDisplay()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    override func loadView() {
-        formView = FormView()
-        view = formView
-    }
-    
-    init(_ viewModel: ViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError()
     }
 
 }
@@ -102,15 +116,15 @@ final class ViewModel {
         reasons = Property.combineLatest(email, emailConfirmation)
             .signal
             .debounce(0.1, on: QueueScheduler.main)
-            .map { [$0, $1].flatMap { $0.error?.reason }.joined(separator: "\n") }
+            .map { [$0, $1].flatMap { $0 }.joined(separator: "\n") }
         
         // A `Property` of the validated username.
         //
         // It outputs the valid username for the `Action` to work on, or `nil` if the form
         // is invalid and the `Action` would be disabled consequently.
-        let validatedEmail = Property.combineLatest(email, emailConfirmation,
-                                                    termsAccepted)
-            .map { e, ec, t in e.value.flatMap { !ec.isFailure && t ? $0 : nil } }
+        let validatedEmail = email //Property.combineLatest(email, emailConfirmation,
+                                   //                 termsAccepted)
+            //map { e, ec, t in e.value.flatMap { !ec.isFailure && t ? $0 : nil } }
         
         // The action to be invoked when the submit button is pressed.
         // It enables only if all the controls have passed their validations.
