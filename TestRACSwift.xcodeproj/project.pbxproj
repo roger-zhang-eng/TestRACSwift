@@ -17,7 +17,6 @@
 		E9DFCC4C1E5BF3E100EB2976 /* TestRACSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC4B1E5BF3E100EB2976 /* TestRACSwiftTests.swift */; };
 		E9DFCC5F1E5BFAE600EB2976 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC5C1E5BFAE600EB2976 /* FormView.swift */; };
 		E9DFCC601E5BFAE600EB2976 /* StdlibExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC5D1E5BFAE600EB2976 /* StdlibExtensions.swift */; };
-		E9DFCC611E5BFAE600EB2976 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC5E1E5BFAE600EB2976 /* UIKitExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 		E9DFCC4D1E5BF3E100EB2976 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9DFCC5C1E5BFAE600EB2976 /* FormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormView.swift; path = Sources/FormView.swift; sourceTree = "<group>"; };
 		E9DFCC5D1E5BFAE600EB2976 /* StdlibExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StdlibExtensions.swift; path = Sources/StdlibExtensions.swift; sourceTree = "<group>"; };
-		E9DFCC5E1E5BFAE600EB2976 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.swift; path = Sources/UIKitExtensions.swift; sourceTree = "<group>"; };
 		E9DFCC621E5BFD9600EB2976 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TestRACSwift-ejsvjwdciortxudzzlzbjjalyvsu/Build/Products/Debug-iphonesimulator/ReactiveSwift/ReactiveSwift.framework"; sourceTree = "<group>"; };
 		E9DFCC641E5BFD9B00EB2976 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TestRACSwift-ejsvjwdciortxudzzlzbjjalyvsu/Build/Products/Debug-iphonesimulator/Result/Result.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,7 +142,6 @@
 			children = (
 				E9DFCC5C1E5BFAE600EB2976 /* FormView.swift */,
 				E9DFCC5D1E5BFAE600EB2976 /* StdlibExtensions.swift */,
-				E9DFCC5E1E5BFAE600EB2976 /* UIKitExtensions.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -357,7 +354,6 @@
 				E9DFCC391E5BF3E100EB2976 /* ViewController.swift in Sources */,
 				E9DFCC371E5BF3E100EB2976 /* AppDelegate.swift in Sources */,
 				E9DFCC601E5BFAE600EB2976 /* StdlibExtensions.swift in Sources */,
-				E9DFCC611E5BFAE600EB2976 /* UIKitExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

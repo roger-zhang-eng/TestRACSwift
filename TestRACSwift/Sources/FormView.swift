@@ -8,7 +8,20 @@ public class FormView: UIView {
 
 	private let disposable = SerialDisposable()
 
-	public let emailField = UITextField()
+    @IBOutlet weak var emailField: UITextField!
+    
+    @IBOutlet weak var emailConfirmationField: UITextField!
+    
+    
+    @IBOutlet weak var termsSwitchLabel: UILabel!
+    @IBOutlet weak var termsSwitch: UISwitch!
+    
+    @IBOutlet weak var submitButton: UIButton!
+    
+    @IBOutlet weak var reasonLabel: UILabel!
+    
+    
+/*	public let emailField = UITextField()
 	public let emailConfirmationField = UITextField()
 	public let termsSwitch = UISwitch()
 	public let submitButton = UIButton(type: .system)
@@ -72,10 +85,11 @@ public class FormView: UIView {
 		reasonLabel.numberOfLines = 0
 		reasonLabel.font = labelFont
 	}
+    */
 }
 
 // http://stackoverflow.com/questions/26600980/how-do-i-set-uibutton-background-color-forstate-uicontrolstate-highlighted-in-s
-extension UIButton {
+/*extension UIButton {
 	func setBackgroundColor(_ color: UIColor, for state: UIControlState) {
 		UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
 		let context = UIGraphicsGetCurrentContext()!
@@ -85,4 +99,4 @@ extension UIButton {
 		UIGraphicsEndImageContext()
 		self.setBackgroundImage(colorImage, for: state)
 	}
-}
+}*/

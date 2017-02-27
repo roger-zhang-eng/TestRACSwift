@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveSwift
+import ReactiveCocoa
 import Result
 
 class ViewController: UIViewController {
@@ -81,7 +82,7 @@ final class ViewModel {
     struct FormError: Error {
         let reason: String
         
-        static let invalidEmail = FormError(reason: "The address must end with `@reactivecocoa.io`.")
+        static let invalidEmail = FormError(reason: "The address must end with `@gmail.com`.")
         static let mismatchEmail = FormError(reason: "The e-mail addresses do not match.")
         static let usernameUnavailable = FormError(reason: "The username has been taken.")
     }
@@ -129,7 +130,7 @@ final class ViewModel {
         // The action to be invoked when the submit button is pressed.
         // It enables only if all the controls have passed their validations.
         submit = Action(input: validatedEmail) { (email: String) in
-            let username = email.stripSuffix("@reactivecocoa.io")!
+            let username = email.stripSuffix("@gmail.com")!
             
             return userService.canUseUsername(username)
                 .promoteErrors(FormError.self)
