@@ -17,8 +17,6 @@ class ViewController: UIViewController {
     
     @IBOutlet var formView: FormView!
     
-    //private var formView: FormView!
-    
     let userService = UserService()
     
     override func viewDidLoad() {
@@ -150,36 +148,3 @@ final class UserService {
         }
     }
 }
-
-/*
- func main() {
-	let userService = UserService()
-	let viewModel = ViewModel(userService: userService)
-	let viewController = ViewController(viewModel)
-	let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 300, height: 350))
-	window.rootViewController = viewController
- 
-	PlaygroundPage.current.liveView = window
-	PlaygroundPage.current.needsIndefiniteExecution = true
- 
-	window.makeKeyAndVisible()
- 
-	// Setup console messages.
-	userService.requestSignal.observeValues {
- print("UserService.requestSignal: Username `\($0)`.")
-	}
- 
-	viewModel.submit.completed.observeValues {
- print("ViewModel.submit: execution producer has completed.")
-	}
- 
-	viewModel.email.result.signal.observeValues {
- print("ViewModel.email: Validation result - \($0 != nil ? "\($0!)" : "No validation has ever been performed.")")
-	}
- 
-	viewModel.emailConfirmation.result.signal.observeValues {
- print("ViewModel.emailConfirmation: Validation result - \($0 != nil ? "\($0!)" : "No validation has ever been performed.")")
-	}
- }
- */
-
